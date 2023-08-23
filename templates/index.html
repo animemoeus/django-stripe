@@ -78,6 +78,36 @@
           </div>
         </div>
       </div>
+
+      <div class="p-2 pb-4">
+        <div class="container-fluid border rounded shadow mt-5">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Payment URL</th>
+                <th scope="col">Status</th>
+                <th scope="col">Created</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for payment in payment_links %}
+              <tr>
+                <td>
+                  <a
+                    href="{{ payment.url }}"
+                    target="_blank"
+                    class="text-decoration-none"
+                    >Click Here</a
+                  >
+                </td>
+                <td>{{payment.payment_status}}</td>
+                <td>{{payment.created_at}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <script

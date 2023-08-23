@@ -16,9 +16,9 @@ class Product(models.Model):
     stripe_price_id = models.CharField(
         max_length=255, default="", blank=True, null=True
     )
-    stripe_session_id = models.CharField(
-        max_length=255, default="", blank=True, null=True
-    )
+    # stripe_session_id = models.CharField(
+    #     max_length=255, default="", blank=True, null=True
+    # )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -29,6 +29,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.create_or_update_stripe_product()
         self.create_or_update_stripe_product_price()
+        self.create_checkout_session()
 
         super(Product, self).save(*args, **kwargs)
 
@@ -86,12 +87,34 @@ class Product(models.Model):
             ],
             mode="payment",
         )
-        self.stripe_session_id = result["id"]
 
-    @property
-    def checkout_url(self):
+        PaymentLink.objects.create(
+            stripe_session_id=result["id"], url=result["url"]
+        ).save()
+
+
+class PaymentLink(models.Model):
+    stripe_session_id = models.CharField(max_length=255, blank=False, null=False)
+    url = models.URLField()
+
+    PAID = "Paid"
+    UNPAID = "Unpaid"
+    PAYMENT_STATUS_CHOICES = ((PAID, PAID), (UNPAID, UNPAID))
+    payment_status = models.CharField(
+        max_length=10, choices=PAYMENT_STATUS_CHOICES, default=UNPAID
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.payment_status} — {self.stripe_session_id}"
+
+    def update_payment_status(self):
         result = stripe.checkout.Session.retrieve(
             self.stripe_session_id,
         )
+        if result:
+            self.payment_status = result["payment_status"].capitalize()
 
-        return result["url"] if result else None
+            self.save()
