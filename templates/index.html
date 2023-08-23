@@ -30,7 +30,7 @@
               <h5 class="card-title">{{ products.0.name}}</h5>
               <p class="card-text">{{ products.0.description}}</p>
               <div class="text-center">
-                <a href="#" class="btn btn-primary"
+                <a href="{{ products.0.checkout_url }}" class="btn btn-primary"
                   >Checkout ${{ products.0.price }}</a
                 >
               </div>
