@@ -14,54 +14,66 @@
   <body>
     <div class="min-vh-100 bg-light">
       <div class="row m-0 p-0 justify-content-between">
+        <!-- We assume that the products have at least 3 items -->
+        <!-- TODO: add condition to handle empty products -->
+        <!-- TODO: add better handling like pagination, initite scroll, etc -->
         <div class="col-md-4 m-0 p-2">
-          <div class="card">
-            <img
-              src="https://cdn.discordapp.com/attachments/858938620425404426/981759343731023912/waifu-animemoeus.jpg"
-              class="card-img-top"
-              alt="..."
-            />
+          <div class="card shadow">
+            <div class="m-2">
+              <img
+                src="https://media.discordapp.net/attachments/858938620425404426/1143936252723335259/89737422_p0.jpg"
+                class="card-img-top border rounded shadow-sm"
+                alt=""
+              />
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{ products.0.name}}</h5>
+              <p class="card-text">{{ products.0.description}}</p>
+              <div class="text-center">
+                <a href="#" class="btn btn-primary"
+                  >Checkout ${{ products.0.price }}</a
+                >
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-4 m-0 p-2">
-          <div class="card">
-            <img
-              src="https://cdn.discordapp.com/attachments/858938620425404426/981759343731023912/waifu-animemoeus.jpg"
-              class="card-img-top"
-              alt="..."
-            />
+          <div class="card shadow">
+            <div class="m-2">
+              <img
+                src="https://media.discordapp.net/attachments/858938620425404426/1143936252723335259/89737422_p0.jpg"
+                class="card-img-top border rounded shadow-sm"
+                alt=""
+              />
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{ products.1.name}}</h5>
+              <p class="card-text">{{ products.1.description}}</p>
+              <div class="text-center">
+                <a href="#" class="btn btn-primary"
+                  >Checkout ${{ products.1.price }}</a
+                >
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-4 m-0 p-2">
-          <div class="card">
-            <img
-              src="https://cdn.discordapp.com/attachments/858938620425404426/981759343731023912/waifu-animemoeus.jpg"
-              class="card-img-top"
-              alt="..."
-            />
+          <div class="card shadow">
+            <div class="m-2">
+              <img
+                src="https://media.discordapp.net/attachments/858938620425404426/1143936252723335259/89737422_p0.jpg"
+                class="card-img-top border rounded shadow-sm"
+                alt=""
+              />
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{ products.2.name}}</h5>
+              <p class="card-text">{{ products.2.description}}</p>
+              <div class="text-center">
+                <a href="#" class="btn btn-primary"
+                  >Checkout ${{ products.2.price }}</a
+                >
+              </div>
             </div>
           </div>
         </div>
